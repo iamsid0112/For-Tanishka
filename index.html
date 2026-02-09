@@ -9,7 +9,7 @@
         .card { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); max-width: 85%; z-index: 10; }
         h1 { color: #ff4d6d; margin-bottom: 20px; font-size: 1.8rem; }
         p { color: #555; margin-bottom: 15px; }
-        input { padding: 12px; border-radius: 10px; border: 2px solid #ff4d6d; margin-bottom: 15px; width: 80%; font-size: 16px; text-align: center; }
+        input { padding: 12px; border-radius: 10px; border: 2px solid #ff4d6d; margin-bottom: 15px; width: 80%; font-size: 16px; text-align: center; outline: none; }
         .buttons { margin-top: 30px; height: 60px; position: relative; display: flex; justify-content: center; gap: 20px; }
         button { padding: 15px 30px; font-size: 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: bold; }
         #yesBtn, #loginBtn { background-color: #ff4d6d; color: white; }
@@ -24,8 +24,7 @@
     <div id="login-page" class="card">
         <h1>Hey Tanishkajii! ❤️</h1>
         <p>To enter, please provide our special date.</p>
-        <p style="font-size: 0.8rem;">(Try DD/MM or Jan 6)</p>
-        <input type="text" id="dateInput" placeholder="When did it all start?">
+        <input type="text" id="dateInput" placeholder="Enter the date...">
         <br>
         <button id="loginBtn">Unlock ❤️</button>
     </div>
@@ -57,7 +56,7 @@
         const yesBtn = document.getElementById('yesBtn');
         const slideshow = document.getElementById('slideshow');
 
-        // Logic for Jan 6th
+        // Logic for Jan 6th - Includes your specific date
         const validDates = ["06/01", "6/1", "Jan 6", "January 6", "01/06", "1/6"];
 
         loginBtn.addEventListener('click', () => {
