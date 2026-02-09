@@ -12,8 +12,8 @@
         button { padding: 15px 30px; font-size: 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: bold; }
         #yesBtn { background-color: #ff4d6d; color: white; }
         #noBtn { background-color: #adb5bd; color: white; position: absolute; touch-action: none; z-index: 100; transition: 0.1s; }
-        .gallery-container { width: 250px; height: 250px; margin: 0 auto 20px; position: relative; border-radius: 20px; overflow: hidden; border: 5px solid #ff4d6d; }
-        #slideshow { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
+        .gallery-container { width: 250px; height: 350px; margin: 0 auto 20px; position: relative; border-radius: 20px; overflow: hidden; border: 5px solid #ff4d6d; background-color: #eee; }
+        #slideshow { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; opacity: 1; }
         .hidden { display: none; }
     </style>
 </head>
@@ -30,7 +30,7 @@
 
     <div id="success-page" class="card hidden">
         <div class="gallery-container">
-            <img id="slideshow" src="1.jpeg">
+            <img id="slideshow" src="1 Medium.jpeg" onerror="console.log('Error loading image')">
         </div>
         <h1>YAY! ❤️ See you soon!</h1>
         <p style="color: #ff4d6d; font-weight: bold;">I love all these versions of you. ✨</p>
@@ -43,7 +43,6 @@
         const sPage = document.getElementById('success-page');
         const slideshow = document.getElementById('slideshow');
 
-        // THE JUMPING GAME
         function jump() {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
@@ -55,17 +54,20 @@
         noBtn.addEventListener('mouseover', jump);
         noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
 
-        // THE PHOTO GALLERY
         let i = 1;
+        // Adjust this number if you have more than 11 photos total
+        const totalPhotos = 11; 
+
         function startGallery() {
             setInterval(() => {
                 slideshow.style.opacity = 0;
                 setTimeout(() => {
-                    i = (i % 17) + 1; // CYCLES 17 PHOTOS
-                    slideshow.src = i + '.jpg';
+                    i = (i % totalPhotos) + 1; 
+                    // Matches your pattern: "number Medium.jpeg"
+                    slideshow.src = i + ' Medium.jpeg';
                     slideshow.style.opacity = 1;
                 }, 500);
-            }, 2000);
+            }, 2500); // 2.5 seconds per photo for a nice cinematic feel
         }
 
         yesBtn.addEventListener('click', () => {
