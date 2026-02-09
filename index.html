@@ -24,7 +24,7 @@
     <div id="login-page" class="card">
         <h1>Hey Tanishkajii! ❤️</h1>
         <p>To enter, please provide our special date.</p>
-        <p style="font-size: 0.8rem;">(Try DD/MM/YYYY or Jan 6)</p>
+        <p style="font-size: 0.8rem;">(Try DD/MM or Jan 6)</p>
         <input type="text" id="dateInput" placeholder="When did it all start?">
         <br>
         <button id="loginBtn">Unlock ❤️</button>
@@ -57,8 +57,8 @@
         const yesBtn = document.getElementById('yesBtn');
         const slideshow = document.getElementById('slideshow');
 
-        // This allows for a few variations of Jan 6th
-        const validDates = ["06/01", "01/06", "6/1", "1/6", "Jan 6", "January 6"];
+        // Logic for Jan 6th
+        const validDates = ["06/01", "6/1", "Jan 6", "January 6", "01/06", "1/6"];
 
         loginBtn.addEventListener('click', () => {
             const val = dateInput.value.toLowerCase().trim();
