@@ -18,23 +18,20 @@
         #slideshow { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
         .hidden { display: none; }
 
+        /* Music Pulse Icon */
+        #music-note { font-size: 30px; margin-top: 10px; cursor: pointer; animation: pulse 1.5s infinite; display: inline-block; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
         /* Hearts Animation */
-        .heart {
-            position: fixed;
-            color: #ff4d6d;
-            font-size: 20px;
-            user-select: none;
-            pointer-events: none;
-            z-index: 1;
-            animation: moveHearts 4s linear forwards;
-        }
-        @keyframes moveHearts {
-            0% { transform: translateY(100vh) scale(0); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
+        .heart { position: fixed; color: #ff4d6d; font-size: 20px; user-select: none; pointer-events: none; z-index: 1; animation: moveHearts 4s linear forwards; }
+        @keyframes moveHearts { 0% { transform: translateY(100vh) scale(0); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
 
     <div id="login-page" class="card">
         <h1>Hey Tanishkajii! ❤️</h1>
@@ -59,9 +56,11 @@
         </div>
         <h1>YAY! ❤️ See you soon!</h1>
         <p style="color: #ff4d6d; font-weight: bold;">I love all these versions of you. ✨</p>
+        <div id="music-note" onclick="toggleMusic()">🎵</div>
     </div>
 
     <script>
+        const audio = document.getElementById('bgMusic');
         const loginBtn = document.getElementById('loginBtn');
         const dateInput = document.getElementById('dateInput');
         const loginPage = document.getElementById('login-page');
@@ -82,6 +81,10 @@
                 alert("That's not it! Try again, Tanishkajii. 😉");
             }
         });
+
+        function toggleMusic() {
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
+        }
 
         function jump() {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
@@ -106,7 +109,8 @@
         let i = 1;
         const totalPhotos = 17; 
         function startGallery() {
-            setInterval(createHeart, 300); // SPAWNS HEARTS EVERY 300ms
+            audio.play().catch(e => console.log("Autoplay blocked, waiting for interaction"));
+            setInterval(createHeart, 300);
             setInterval(() => {
                 slideshow.style.opacity = 0;
                 setTimeout(() => {
