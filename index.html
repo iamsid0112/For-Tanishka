@@ -43,9 +43,10 @@
         const sPage = document.getElementById('success-page');
         const slideshow = document.getElementById('slideshow');
 
+        // THE JUMPING GAME
         function jump() {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40);
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
             noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
@@ -54,12 +55,13 @@
         noBtn.addEventListener('mouseover', jump);
         noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
 
+        // THE PHOTO GALLERY
         let i = 1;
         function startGallery() {
             setInterval(() => {
                 slideshow.style.opacity = 0;
                 setTimeout(() => {
-                    i = (i % 17) + 1; // It will look for 1.jpg through 30.jpg
+                    i = (i % 17) + 1; // CYCLES 17 PHOTOS
                     slideshow.src = i + '.jpg';
                     slideshow.style.opacity = 1;
                 }, 500);
