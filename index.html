@@ -2,43 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Tanishka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Tanishka ❤️</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-            background-color: #ffebee;
-            text-align: center;
-        }
-        h1 { color: #d32f2f; }
-        .buttons { margin-top: 20px; position: relative; width: 300px; height: 100px; }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 10px;
-            border: none;
-            transition: 0.2s;
-        }
-        #yesBtn { background-color: #4caf50; color: white; }
-        #noBtn {
-            background-color: #f44336;
-            color: white;
-            position: absolute;
-        }
+        body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #fff0f3; font-family: 'Arial', sans-serif; overflow: hidden; text-align: center; }
+        .card { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); max-width: 85%; z-index: 10; }
+        h1 { color: #ff4d6d; margin-bottom: 20px; font-size: 1.8rem; }
+        .buttons { margin-top: 30px; height: 60px; position: relative; display: flex; justify-content: center; gap: 20px; }
+        button { padding: 15px 30px; font-size: 18px; border-radius: 50px; border: none; cursor: pointer; font-weight: bold; }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #adb5bd; color: white; position: absolute; touch-action: none; z-index: 100; transition: 0.1s; }
+        .gallery-container { width: 250px; height: 250px; margin: 0 auto 20px; position: relative; border-radius: 20px; overflow: hidden; border: 5px solid #ff4d6d; }
+        #slideshow { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
         .hidden { display: none; }
-        img { width: 200px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <div id="question-container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZqZzR6eXp6ZzR6eXp6ZzR6eXp6ZzR6eXp6ZzR6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Cat">
+    <div id="question-page" class="card">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZqZzR6eXp6ZzR6eXp6ZzR6eXp6ZzR6eXp6ZzR6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" style="width: 150px; margin-bottom: 20px;">
         <h1>Tanishka, will you be my Valentine? ❤️</h1>
         <div class="buttons">
             <button id="yesBtn">Yes!</button>
@@ -46,30 +28,48 @@
         </div>
     </div>
 
-    <div id="success-container" class="hidden">
-        <h1>WOOHOO! I knew you'd say yes! 🎉</h1>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2ZueGZ3bmZqZzR6eXp6ZzR6eXp6ZzR6eXp6ZzR6eXp6ZzR6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/l41lTfuxV6yW9vX4A/giphy.gif" alt="Celebration">
-        <p>Prepare for the best Valentine's Day ever.</p>
+    <div id="success-page" class="card hidden">
+        <div class="gallery-container">
+            <img id="slideshow" src="1.jpg">
+        </div>
+        <h1>YAY! ❤️ See you soon!</h1>
+        <p style="color: #ff4d6d; font-weight: bold;">I love all these versions of you. ✨</p>
     </div>
 
     <script>
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const questionContainer = document.getElementById('question-container');
-        const successContainer = document.getElementById('success-container');
+        const qPage = document.getElementById('question-page');
+        const sPage = document.getElementById('success-page');
+        const slideshow = document.getElementById('slideshow');
 
-        // The "Runaway" logic
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-        });
+        function jump() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
 
-        // The "Success" logic
+        noBtn.addEventListener('mouseover', jump);
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
+
+        let i = 1;
+        function startGallery() {
+            setInterval(() => {
+                slideshow.style.opacity = 0;
+                setTimeout(() => {
+                    i = (i % 17) + 1; // It will look for 1.jpg through 30.jpg
+                    slideshow.src = i + '.jpg';
+                    slideshow.style.opacity = 1;
+                }, 500);
+            }, 2000);
+        }
+
         yesBtn.addEventListener('click', () => {
-            questionContainer.classList.add('hidden');
-            successContainer.classList.remove('hidden');
+            qPage.classList.add('hidden');
+            sPage.classList.remove('hidden');
+            startGallery();
         });
     </script>
 </body>
